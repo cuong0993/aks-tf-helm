@@ -1,0 +1,4 @@
+wordpressUsername: admin
+wordpressPassword: StewPidSimp1e
+service:
+  type: LoadBalancer
