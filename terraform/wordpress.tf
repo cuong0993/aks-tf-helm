@@ -8,19 +8,6 @@ resource "helm_release" "wordpress" {
     "${file("values.yaml")}"
   ]
 
-  # set {
-  #   name  = "wordpressBlogName"
-  #   value = "${var.wp_site_name}"
-  # }
-  # set {
-  #   name  = "wordpressUsername"
-  #   value = "${var.wp_username}"
-  # }
-  # set_sensitive {
-  #   name  = "wordpressPassword"
-  #   value = "${var.wp_username}"
-  # }
-
   depends_on = [
     azurerm_kubernetes_cluster.example
     ]

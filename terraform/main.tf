@@ -9,10 +9,6 @@ terraform {
     storage_account_name = "__tfstatestorageaccountname__"
     container_name       = "__tfstatecontainername__"
     key                  = "__tfstatekey__"
-    # resource_group_name  = "RG-terraform-state"
-    # storage_account_name = "vratfstate06081035"
-    # container_name       = "tfstate"
-    # key                  = "terraform.tfstate"
     }
 }
 
@@ -60,21 +56,3 @@ resource "local_file" "kubeconfig" {
   filename     = "./kubeconfig"
   content      = azurerm_kubernetes_cluster.example.kube_config_raw
 }
-
-# resource "local_file" "clientkey" {
-#   depends_on = [azurerm_kubernetes_cluster.example]
-#   filename = "./clientkey.pem"
-#   content     = azurerm_kubernetes_cluster.example.kube_config.0.client_key
-# }
-
-# resource "local_file" "rootca" {
-#   depends_on = [azurerm_kubernetes_cluster.example]
-#   filename = "./rootca.pem"
-#   content     = azurerm_kubernetes_cluster.example.kube_config.0.cluster_ca_certificate
-# }
-
-# resource "local_file" "hosturl" {
-#   depends_on = [azurerm_kubernetes_cluster.example]
-#   filename = "./hosturl.txt"
-#   content     = azurerm_kubernetes_cluster.example.kube_config.0.host
-# }
