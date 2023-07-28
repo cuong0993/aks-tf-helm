@@ -1,0 +1,182 @@
+---
+project: Home_Lab_DAG
+kind: PIPELINE
+name: Azure Terraform Blog Pipeline
+icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEsUlEQVR4nO2Yy08bVxjFh0qoC6R2wSab7lJwQpo2cdqkJPg+ZgaxqIR5DAbix3TDruJPwP+Cl10FA2kCSZOQcRZV1nZD6wZDbMIjtAEMxlZaUYkFQoJbzZ03ngJNMmSm7ZHOgoel3/l0xt/cyzD/y4WKocrjKCo1MV6ViCskhsu7Ii4nBrg/PmS8GEDUjCqvRFwZHBoi7zGeDIA1l7MiKjcz3g1QkUPsi7gyIbb+/hHjzQAVrVbbMVSOf9O2+D7jyQBYcQxXlkRcERivBhBVM/+WADGH90cgIH0MA5LkWACn9gfP/1AHWqQ4aJF2YCBFHA3wdvcHqUEBKQpbpJIMDlskAq89PKEAuEwdw5uvtT/QtZQfBKS0GRxdfUhQ86TTAWRoCq66RGJ4Yz+K1yfE1uKR+wOA1CnQkvoWBFJ7CrhEEIWfJKj5AUFf3ncugBW6RKJ4Q/W6YrS2HUFrtvvD78/WwoA0CALSn9apa+APCLpyn+DL944O8DW7yYm4kj8c3Ji0EcAGGq+TCC6qXlO9shTBK/r+ACDFgYBUqAaf1MHR5XsEf/E9wZ/fPd7X9oCf1MoPYQyVt2x6bamI9hkzeDX0KglTr5Awkv1S/5xdzy3gJnh86c4/2zsRtlgv4s1EFG3u/V1F9P89BrTs69S/GQHknl+19lyrixkc+ycIe3Hi9RZnDG34o3gjXV2RoimAAh62AdegFf9Kzaiy67kV/A4FZy+ME/az22+y+UlNBBeFCFpfNU9b++txoPvRsuoXRgCbnuNLdw3wi+OEvXCbwrOf3nrzV5cwX6qTv03CaHVHhtZ/r1fkILQVXHYfWjICaOBVdRnXpy6Ds+e/I9wnN9/eu1eELTZchy8faT8fNm0NWvEiNaPKrud24Ny5m4RrGnPu5fE40H1ogfSqZrQANj03wDX4McI1jRLu7IhzAfrBMtcPX+T7dWgDXIPuRfOqn+sgOjjt+S0Kz50/CD5KeF9ysdWX/IpxUgP+bG0fXBzsgwtbfTbQIeo5akYLYHpAreBjFJzzJbf5xmS87XTC2RNgL1p83IuW6Hkgws7Vh9B8IgTn9npN0IoLpAcVjAA2PafgZ5L7fOPwCDh745Sj4EaABRJC87syuMAt0/OAgJ77e2AhLUMr4HnVz/QAtOfnrD3nziSzrY0jJ3sLYqkILLwKwYJ6HiA1IVwQBDS7KoP3oFkioFkjgAmc942UWn3DA0PM0MnfQ2n1sE46nw2hZ3SSYT5XJ6CZuABzOwKaMQLQB3Rkl/MlE22nRz9g3pV6DlREtjxpAc3sCyh3QwB52uUQm2vohtP6/uAbhx+xvmQD865lhabgqnOkG+VIF3y63QWm421uvU8SLNAzFFrxNOmGsp/KIUgnzC51g6z77pPM0z4I3QV/UZ2l7oQ/u+8+yQzdbQutgCv+yYUBDpm2Bi27A05RM27TYdCdKnQHfKL6R/cFqIY2pm0GD1Jn3BjgaGizGbfpONCuDtAJMlwQZPJHgbs2gHYeCML0YDtIb3kygKYgO1XfDjKJdpDe82QATUH0xB8EmbRnAygiNR0gIwRhetWjARTxfK6uHaTjQZDZ8WQATUF2qiEIMvp54D+tvwBCXaCOc/6aLQAAAABJRU5ErkJggg==
+enabled: true
+global: false
+description: AKS cluster with Wordpress helm chart installed
+concurrency: 10
+input:
+  deploymentName: dev-deployment
+  pipelineTask: create
+_inputMeta:
+  pipelineTask:
+    description: Do we create or destroy the resource
+    mandatory: true
+  deploymentName:
+    description: ''
+    mandatory: true
+output:
+  WP_URL: ${Kubernetes.Get service IP.output.exports.WPSITEURL}
+workspace:
+  type: DOCKER
+  endpoint: DAG Home Docker
+  image: americanbwana/cas-terraform-146:latest
+  registry: ''
+  path: /build
+  autoCloneForTrigger: false
+  limits:
+    memory: 512
+    cpu: 1.0
+stageOrder:
+- Setup
+- Terraform
+- Kubernetes
+- Terraform Destroy
+stages:
+  Terraform:
+    taskOrder:
+    - Terraform init
+    - Terraform plan
+    - Terraform apply
+    tasks:
+      Terraform plan:
+        type: CI
+        input:
+          steps:
+          - set +x
+          - . /build/tf.secrets
+          - ''
+          - cd /build/templates/terraform
+          - set -x
+          - 'terraform plan '
+          export: [
+            ]
+          artifacts: [
+            ]
+          process: [
+            ]
+      Terraform init:
+        type: CI
+        input:
+          steps:
+          - set +x
+          - . /build/tf.secrets
+          - ''
+          - '# Terraform init '
+          - cd /build/templates/terraform
+          - set -x
+          - 'terraform init '
+          - ''
+          - ''
+          - ''
+          export: [
+            ]
+          artifacts: [
+            ]
+          process: [
+            ]
+      Terraform apply:
+        type: CI
+        preCondition: ${input.pipelineTask} == "create"
+        input:
+          steps:
+          - set +x
+          - . /build/tf.secrets
+          - ''
+          - cd /build/templates/terraform
+          - set -x
+          - terraform apply -auto-approve
+          - ''
+          export: [
+            ]
+          artifacts: [
+            ]
+          process: [
+            ]
+  Setup:
+    taskOrder:
+    - Setup environment
+    tasks:
+      Setup environment:
+        type: CI
+        input:
+          steps:
+          - export BUILDTIME="$(date "+%Y%m%d-%H%M%S")"
+          - '#export BUILDTIME="20200713-102624"'
+          - '# Create environment variables'
+          - cat <<EOF >> /build/tf.secrets
+          - export TF_VAR_subscription_id="${var.resident-azure-subscription-id}"
+          - export TF_VAR_client_id="${var.resident-azure-client-id}"
+          - export TF_VAR_client_secret="${var.resident-azure-client-secret}"
+          - export TF_VAR_tenant_id="${var.resident-azure-tenant-id}"
+          - export TF_VAR_deploymentName="${input.deploymentName}"
+          - export TF_VAR_buildtime=$BUILDTIME
+          - export ARM_CLIENT_ID="${var.dag-azure-terraform-app-client_id}"
+          - export ARM_CLIENT_SECRET="${var.dag-azure-terraform-app-client_secret}"
+          - export ARM_TENANT_ID="${var.dag-azure-terraform-app-tenant_id}"
+          - export ARM_SUBSCRIPTION_ID="${var.dag-azure-terraform-app-subscription_id}"
+          - ''
+          - EOF
+          - ''
+          - ''
+          - git clone https://github.com/americanbwana/azure-terraform-blog.git templates
+          - ''
+          - ''
+          - '# change dummy values to inputs'
+          - 'sed -i "s/__tfstateresourcegroupname__/${var.dag-azure-aks-tfstateResourceGroupName}/g" /build/templates/terraform/main.tf '
+          - ''
+          - sed -i "s/__tfstatestorageaccountname__/${var.dag-azure-aks-tfstateStorageAccountName}/g"
+            /build/templates/terraform/main.tf
+          - ''
+          - sed -i "s/__tfstatecontainername__/${var.dag-azure-aks-tfstateContainerName}/g" /build/templates/terraform/main.tf
+          - ''
+          - sed -i "s/__tfstatekey__/${input.deploymentName}.tfstate/g" /build/templates/terraform/main.tf
+          - ''
+          export: [
+            ]
+          artifacts: [
+            ]
+          process: [
+            ]
+  Terraform Destroy:
+    taskOrder:
+    - Terraform destroy
+    tasks:
+      Terraform destroy:
+        type: CI
+        preCondition: ${input.pipelineTask} == "destroy"
+        input:
+          steps:
+          - set +x
+          - . /build/tf.secrets
+          - ''
+          - cd /build/templates/terraform
+          - set -x
+          - terraform destroy -auto-approve
+          - ''
+          export: [
+            ]
+          artifacts: [
+            ]
+          process: [
+            ]
+  Kubernetes:
+    taskOrder:
+    - Get service IP
+    tasks:
+      Get service IP:
+        type: CI
+        preCondition: ${input.pipelineTask} == "create"
+        input:
+          steps:
+          - export KUBECONFIG="/build/templates/terraform/kubeconfig"
+          - export WPSITEURL="http//"$(kubectl get service wordpresssite -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+          - ''
+          export:
+          - WPSITEURL
+          artifacts: [
+            ]
+          process: [
+            ]

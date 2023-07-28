@@ -1,0 +1,22 @@
+formatVersion: 1
+inputs:
+  pipelineTask:
+    type: string
+    title: Pipeline Task
+    description: 'Create '
+    readOnly: true
+    default: create
+resources:
+  cs.pipeline:
+    type: codestream.execution
+    metadata:
+      layoutPosition:
+        - 0
+        - 0
+    properties:
+      pipelineId: 2b80427c-4a15-4204-aebe-2b772c96414e
+      outputs:
+        computed: true
+      inputs:
+        deploymentName: ${env.deploymentName}
+        pipelineTask: ${input.pipelineTask}
