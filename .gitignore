@@ -35,3 +35,4 @@ terraform.rc
 
 # Mac stuff
 .DS_Store
+terraform/kubeconfig

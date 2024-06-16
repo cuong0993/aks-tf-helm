@@ -1,26 +1,3 @@
-variable "subscription_id" {
-  sensitive   = true
-  default     = "notset"
-  description = "Azure subscription_id"
-
-}
-
-variable "client_id" {
-  sensitive   = true
-  default     = "changeMe"
-  description = "Azure client_id"
-}
-
-variable "client_secret" {
-  sensitive   = true
-  default     = "changeMe"
-  description = "Azure client_secret"
-}
-
-variable "tenant_id" {
-  description = "Azure tenant_id"
-}
-
 variable "deploymentName" {
   type        = string
   description = "AKS deployment name"
