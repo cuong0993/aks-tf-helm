@@ -3,7 +3,7 @@ resource "helm_release" "wordpress" {
 
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "wordpress"
-  version    = "~>16.1.0"
+  version    = "22.4.10"
   values = [
     "${file("values.yaml")}"
   ]

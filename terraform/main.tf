@@ -4,21 +4,10 @@ terraform {
       source = "hashicorp/azurerm"
     }
   }
-  backend "azurerm" {
-    resource_group_name  = "__tfstateresourcegroupname__"
-    storage_account_name = "__tfstatestorageaccountname__"
-    container_name       = "__tfstatecontainername__"
-    key                  = "__tfstatekey__"
-  }
 }
 
 provider "azurerm" {
   features {}
-  # use_msi = true
-  subscription_id = var.subscription_id
-  tenant_id       = var.tenant_id
-  client_id       = var.client_id     # App ID
-  client_secret   = var.client_secret # Value
 }
 
 
@@ -37,16 +26,17 @@ resource "azurerm_kubernetes_cluster" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   dns_prefix          = "AKS-${var.deploymentName}-${random_id.server.dec}"
+  kubernetes_version  = "1.29.4"
 
-  service_principal {
-    client_id     = var.client_id     # AppId
-    client_secret = var.client_secret # Value
+  identity {
+    type = "SystemAssigned"
   }
 
   default_node_pool {
-    name       = "default"
-    node_count = 1
-    vm_size    = "Standard_DS2_v2"
+    name                        = "default"
+    node_count                  = 1
+    vm_size                     = "Standard_B2pls_v2"
+    temporary_name_for_rotation = "tmpnppool01"
   }
 
 }
