@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
+      source = "hashicorp/azurerm"
     }
   }
   backend "azurerm" {
@@ -9,16 +9,16 @@ terraform {
     storage_account_name = "__tfstatestorageaccountname__"
     container_name       = "__tfstatecontainername__"
     key                  = "__tfstatekey__"
-    }
+  }
 }
 
 provider "azurerm" {
   features {}
   # use_msi = true
-  subscription_id   = "${var.subscription_id}"
-  tenant_id         = "${var.tenant_id}"
-  client_id         = "${var.client_id}" # App ID
-  client_secret     = "${var.client_secret}" # Value
+  subscription_id = var.subscription_id
+  tenant_id       = var.tenant_id
+  client_id       = var.client_id     # App ID
+  client_secret   = var.client_secret # Value
 }
 
 
@@ -39,8 +39,8 @@ resource "azurerm_kubernetes_cluster" "example" {
   dns_prefix          = "AKS-${var.deploymentName}-${random_id.server.dec}"
 
   service_principal {
-    client_id     = "${var.client_id}" # AppId
-    client_secret = "${var.client_secret}" # Value
+    client_id     = var.client_id     # AppId
+    client_secret = var.client_secret # Value
   }
 
   default_node_pool {
@@ -52,7 +52,7 @@ resource "azurerm_kubernetes_cluster" "example" {
 }
 
 resource "local_file" "kubeconfig" {
-  depends_on   = [azurerm_kubernetes_cluster.example]
-  filename     = "./kubeconfig"
-  content      = azurerm_kubernetes_cluster.example.kube_config_raw
+  depends_on = [azurerm_kubernetes_cluster.example]
+  filename   = "./kubeconfig"
+  content    = azurerm_kubernetes_cluster.example.kube_config_raw
 }
