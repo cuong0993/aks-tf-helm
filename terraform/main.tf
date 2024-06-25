@@ -10,6 +10,10 @@ provider "azurerm" {
   features {}
 }
 
+terraform {
+  backend "pg" {
+  }
+}
 
 resource "random_id" "server" {
 
@@ -35,7 +39,7 @@ resource "azurerm_kubernetes_cluster" "example" {
   default_node_pool {
     name                        = "default"
     node_count                  = 1
-    vm_size                     = "Standard_B2pls_v2"
+    vm_size                     = "Standard_B2ps_v2"
     temporary_name_for_rotation = "tmpnppool01"
   }
 

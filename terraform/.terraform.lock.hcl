@@ -2,28 +2,36 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/azurerm" {
-  version = "3.108.0"
+  version = "3.109.0"
   hashes = [
-    "h1:36WHCMjguUKG15iS3WNqmk2/FQH2AwFL0mJl0VWCfps=",
-    "zh:2afecf948fd702bc08c87d9114595809d011f99a70a12dbf6bc67a12d0bee5fc",
-    "zh:395b6d1384a579867064e62d49b0b91e15919c33b03ea8b5031c2779bfa16b3d",
-    "zh:3e5594c59b6b02bc6e0f4c3de71aa2ab992494c53725fb3c64d36745f3814ef3",
-    "zh:4613e190609377309f6a4ac44f631c9469efab3ae148dbb09e73718201dc4f42",
-    "zh:624f01cb7604d58100068401bd07ab09a141e7bd318f8214127838cf202e4868",
-    "zh:65709950c9933e38704e2075a2339951e1259a6e882f35d390be36e1844ebc72",
-    "zh:af82657fad4e3a177f2ebb8035b45bda40f8856eb999288533321028794d03e5",
-    "zh:c40b331eba08830d16c0e6795fa7cbf08231073df2cfdb0f34e9d908a915981a",
-    "zh:d6ccd533a0bd984ca7ed1ae860e057e9e2f88468745be9712236d2d240353de4",
-    "zh:f361fd398e8772f8554a010331d161d6f7284a43238fd28bfa7b41795a5538b8",
+    "h1:/rMaSj3rKkD+jjzRs+awKuz9Cd6pbIpEuR4qYr/5cq0=",
+    "h1:On2MrclW5OMUV0zubyVHXONYni97C9ubs3rTAwUJ96Q=",
+    "h1:UK+UFYL+ihy81hdglJlcgenxCslOTs9MK+ySRLm4izw=",
+    "h1:rrySPpbxkcuBtlWs0cIb+vxfDKZd0XMQB7dYhfxuw8U=",
+    "h1:tb3a5x6HV4YRxyL3VpdTWe1vsKocKi1HT0KFWnF5ZjM=",
+    "zh:4324c3df26709c7e669b751259cc5e62c4694ab44370dfcdfe197dcd9261c365",
+    "zh:4e3e83649240cea7105cd2802d0ae64b143fb543c2f559173feae5a108bc4287",
+    "zh:74ebf6be1277e9bd357b011026b80fc5ec1c26b70ec7ddd5fcae5e977f9a66ef",
+    "zh:82cfd3c92035f834a05f4b91d813a059a29ff4157792e36a0b3a224cba8737ae",
+    "zh:93f05c8ae3555c885c84b82781b2e90774671c321138b7f3c38ecd498009e1d8",
+    "zh:9b445a9a1544b4b38db10fadbd9ffd5efdded0def54feb9ca593e1bec6fbec5f",
+    "zh:b21ccd2c1bc691cf2f9876482b6e226d8a37a48de951b168a10f96ba929ebefd",
+    "zh:b7b7e458eb3c22669e1d36e9ef1886272c10f310501001abce8ae76383014fa5",
+    "zh:bd3c0cf7caab0a989227934bc60a8ac27131efcf84dd77cb6e32e68374170aee",
+    "zh:f4b9ccbb28eadf3825f6d7d38a3519379de222f136235a2f21a96c0221d65fb8",
     "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
-    "zh:f8c2132c77d35930203ec66f1bf9bbf633a2406e9f7b572ff425d65b8aa8c492",
+    "zh:f8ef0b4a970ff5edeadfdeed77f9d0682befdca5df4e9b6d9dcfdf9903305b26",
   ]
 }
 
 provider "registry.terraform.io/hashicorp/helm" {
   version = "2.14.0"
   hashes = [
+    "h1:2SNS+3NDQsl1uwoOK4TLofszyg2hzGr/j0Dosc3bBS8=",
     "h1:8Vt9264v3UE6mHLRG8yiteVl5h8ZSTkJXf1xdVLa7GA=",
+    "h1:K8aRZTK4Eq2RacrcCviWaxDlHmeUi+M4vmBFoKAk/O0=",
+    "h1:MCwlHF214XoAqJ11wR1SQuZmjJyAagKOqgSzl9hHrPg=",
+    "h1:QHpOJbeU6V8Qt6YFRWkQ7/kttJu8cN3egyG7TImZEKw=",
     "zh:087a475fda3649e4b6b9aeb5f21704972f5d85c10d0bf334289b0a1b8c1a5575",
     "zh:1877991d976491d4e2a653a89491bd3b92123a00f442f15aa62caea8902677c7",
     "zh:233d9e550b900be8bbf62871322964239bb4827b3500b77d7e2652a8bae6a106",
@@ -43,6 +51,10 @@ provider "registry.terraform.io/hashicorp/local" {
   version = "2.5.1"
   hashes = [
     "h1:/GAVA/xheGQcbOZEq0qxANOg+KVLCA7Wv8qluxhTjhU=",
+    "h1:8oTPe2VUL6E2d3OcrvqyjI4Nn/Y/UEQN26WLk5O/B0g=",
+    "h1:Np4kERf9SMrqUi7DJ1rK3soMK14k49nfgE7l/ipQ5xw=",
+    "h1:fm2EuMlsdPTuv2tKwx3PMJzWJUh7aMtU9Eky7t4fMys=",
+    "h1:tjcGlQAFA0kmQ4vKkIPPUC4it1UYxLbg4YvHOWRAJHA=",
     "zh:0af29ce2b7b5712319bf6424cb58d13b852bf9a777011a545fac99c7fdcdf561",
     "zh:126063ea0d79dad1f68fa4e4d556793c0108ce278034f101d1dbbb2463924561",
     "zh:196bfb49086f22fd4db46033e01655b0e5e036a5582d250412cc690fa7995de5",
@@ -61,7 +73,11 @@ provider "registry.terraform.io/hashicorp/local" {
 provider "registry.terraform.io/hashicorp/random" {
   version = "3.6.2"
   hashes = [
+    "h1:5lstwe/L8AZS/CP0lil2nPvmbbjAu8kCaU/ogSGNbxk=",
+    "h1:R5qdQjKzOU16TziCN1vR3Exr/B+8WGK80glLTT4ZCPk=",
+    "h1:UQlmHGddu39vVzG8kruMsde4GHlG+1S7OLqFApbJvtc=",
     "h1:VavG5unYCa3SYISMKF9pzc3718M0bhPlcbUZZGl7wuo=",
+    "h1:wmG0QFjQ2OfyPy6BB7mQ57WtoZZGGV07uAPQeDmIrAE=",
     "zh:0ef01a4f81147b32c1bea3429974d4d104bbc4be2ba3cfa667031a8183ef88ec",
     "zh:1bcd2d8161e89e39886119965ef0f37fcce2da9c1aca34263dd3002ba05fcb53",
     "zh:37c75d15e9514556a5f4ed02e1548aaa95c0ecd6ff9af1119ac905144c70c114",
